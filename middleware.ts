@@ -1,6 +1,10 @@
 import { NextResponse } from 'next/server';
 
 export function middleware(req) {
+  if (process.env.DEVELOPMENT !== 'true') {
+    return NextResponse.next();
+  }
+
   const url = req.nextUrl;
 
   // Check if the request is for an image in the content/rules folder

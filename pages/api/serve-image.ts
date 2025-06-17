@@ -3,6 +3,11 @@ import fs from 'fs';
 import path from 'path';
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
+  if (process.env.DEVELOPMENT !== 'true') {
+    res.status(403).send('API route is disabled in production');
+    return;
+  }
+
   const { filepath } = req.query;
 
   if (!filepath || typeof filepath !== 'string') {
@@ -12,8 +17,6 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
 
   const unescapedFilepath = decodeURIComponent(filepath);
   const imagePath = path.join(process.cwd(), 'content/', unescapedFilepath);
-
-  console.log('Serving image from:', imagePath);
 
   try {
     const imageBuffer = fs.readFileSync(imagePath);
