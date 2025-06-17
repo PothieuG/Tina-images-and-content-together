@@ -1,11 +1,12 @@
 import { defineConfig } from "tinacms";
 import nextConfig from '../next.config'
 
-import Post from "./collection/post";
 import Global from "./collection/global";
 import Author from "./collection/author";
 import Page from "./collection/page";
 import Tag from "./collection/tag";
+
+import RuleCollection from "./collection/rule";
 
 const config = defineConfig({
   clientId: process.env.NEXT_PUBLIC_TINA_CLIENT_ID!,
@@ -22,8 +23,8 @@ const config = defineConfig({
     // },
     // this is the config for the tina cloud media store
     tina: {
-      publicFolder: "public",
-      mediaRoot: "uploads",
+      publicFolder: "content",
+      mediaRoot: "rules",
     },
   },
   build: {
@@ -32,7 +33,7 @@ const config = defineConfig({
     basePath: nextConfig.basePath?.replace(/^\//, '') || '', // The base path of the app (could be /blog)
   },
   schema: {
-    collections: [Page, Post, Author, Tag, Global],
+    collections: [Page, RuleCollection, Author, Tag, Global],
   },
 });
 
