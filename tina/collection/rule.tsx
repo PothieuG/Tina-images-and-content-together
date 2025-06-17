@@ -27,7 +27,7 @@ const RuleCollection: Collection = {
             isTitle: true,
             required: true,
         },
-        { type: 'datetime', name: 'date', label: 'Date', required: true },
+        { type: 'datetime', name: 'date', label: 'Date' },
         {
             type: 'reference',
             label: 'Author',
